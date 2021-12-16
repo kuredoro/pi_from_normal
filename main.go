@@ -8,8 +8,8 @@ import (
 	"github.com/cpmech/gosl/rnd"
 )
 
-// 11:10 start
-// 11:21 end
+// normal returns a number according to the normal distribution in range [0, 1].
+// Given in the task
 func normal() float64 {
 	return rnd.Normal(0.5, 0.12)
 }
@@ -22,6 +22,7 @@ func (c Circle) Contains(x, y float64) bool {
 	return math.Hypot(x-c.X, y-c.Y) <= c.R
 }
 
+// Square defines a square with center at X and Y coordinates and a helf-length R.
 type Square struct {
 	X, Y, R float64
 }
@@ -42,6 +43,12 @@ func main() {
 	n := *nFlag
 	radius := *rFlag
 
+    // We'll use the Monte-Carlo method, but it works only with uniform distribution.
+    // Idea is to take rather small part of the normal distribution, so that it
+    // approximates to the uniform distribution.
+    
+    // This in turn means that both the bounding box and the circle should be quite
+    // small.
 	box := Square{X: 0.5, Y: 0.5, R: radius}
 	circle := Circle{X: 0.5, Y: 0.5, R: radius}
 
@@ -64,8 +71,8 @@ func main() {
 
 	circleArea := box.Area() * float64(in) / float64(in+out)
 
-	// A = pi * r^2
-	// pi = A / r^2
+	// Area = pi * r^2
+	// pi = Area / r^2
 	pi := circleArea / circle.R / circle.R
 
 	fmt.Printf("π = %.8f\n", pi)
