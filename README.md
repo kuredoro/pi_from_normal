@@ -5,7 +5,7 @@ Try it yourself:
 package main
 
 import (
-    "fmt"
+	"fmt"
 
 	"github.com/cpmech/gosl/rnd"
 )
@@ -16,7 +16,7 @@ func normal() float64 {
 }
 
 func main() {
-    // Your solution here
+	// Your solution here
 
 	fmt.Println("hello, world")
 }
